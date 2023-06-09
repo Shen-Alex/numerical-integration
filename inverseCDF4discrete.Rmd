@@ -1,0 +1,18 @@
+---
+title: "inverse CDF method for discrete distribution"
+author: "Alex Shen"
+date: "2023-03-06"
+output:
+  html_document:
+    theme: cerulean
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+

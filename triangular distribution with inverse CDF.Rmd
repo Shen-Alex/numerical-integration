@@ -1,0 +1,125 @@
+---
+title: "Generating triangular distribution via inverse cdf and writing equations in rmarkdown"
+author: "Alex Shen"
+date: "2023-03-06"
+output:
+  html_document:
+    theme: cerulean
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Triangular distribution
+
+Triangular distribution is the sum of two independent uniform distribution, with a piece wise pdf of
+$$ f(x)= \left\{
+\begin{array}{ll}
+ x & 0\le x \le 1\\
+ 2-x & 1 \le x \le 2\\
+ 0 &otherwise\\
+ \end{array}
+ \right. $$
+
+and a piece wise CDF of
+ 
+ - $F(x) = \frac{x^2}{2}$, for $0 \le x < 1$;
+ - $F(x) = -2+2x-\frac{x^2}{2}$, for $1 \le x \le 2$
+
+Let F(x)=u, and solve x in terms of u to get the inverse CDF
+ 
+ 
+ - $x = \sqrt{2u}$, for $0 \le u < 1/2$;
+ - $x = 2-\sqrt{2(1-u)}$, for $1/2 \le u \le 1$
+ 
+ 
+A few other Latex like formulas, please refer to
+
+- [R markdown for Scientist](https://rmd4sci.njtierney.com/math)
+- [Arthoring books with R Markdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html)
+- [Mathematics in R markdown](https://rpruim.github.io/s341/S19/from-class/MathinRmd.html)
+- [An example R Markdown](https://www.math.mcgill.ca/yyang/regression/RMarkdown/example.html)
+$$
+\sum_{i = 1}^{n}{(\bar{x} - x_i)^2}
+$$
+
+$$
+Pr(\theta | y) = \frac{Pr(y | \theta) Pr(\theta)}{Pr(y)}
+$$
+
+$$
+Pr(\theta | y) \propto Pr(y | \theta) Pr(\theta)
+$$
+
+$$
+Y \sim X\beta_0 + X\beta_1 + \epsilon
+$$
+
+$$
+\epsilon \sim N(0,\sigma^2)
+$$
+
+$$f(k) = {n \choose k} p^{k} (1-p)^{n-k}$$
+
+$$X = \begin{bmatrix}1 & x_{1}\\
+1 & x_{2}\\
+1 & x_{3}
+\end{bmatrix}$$
+
+\begin{equation*} 
+\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)
+\end{equation*}
+
+\begin{equation} 
+\begin{split}
+\mathrm{Var}(\hat{\beta}) & =\mathrm{Var}((X'X)^{-1}X'y)\\
+ & =(X'X)^{-1}X'\mathrm{Var}(y)((X'X)^{-1}X')'\\
+ & =(X'X)^{-1}X'\mathrm{Var}(y)X(X'X)^{-1}\\
+ & =(X'X)^{-1}X'\sigma^{2}IX(X'X)^{-1}\\
+ & =(X'X)^{-1}\sigma^{2}
+\end{split}
+(\#eq:var-beta)
+\end{equation}
+
+
+\begin{align*}
+x & = \frac{-b \pm \sqrt{b^{2} - 4ac}}{2a}\\
+a & = b \\
+X &\sim {\sf Norm}(10, 3) \\
+5 & \le 10
+\end{align*}
+
+$$
+\widehat{\theta}_1=\frac{X_1+\ldots+X_{n_1}}{n_1}
+$$
+
+x=\frac{-b \pm \sqrt{b^2-4 a c}}{2 a}
+
+$x=\frac{-b \pm \sqrt{b^2-4 a c}}{2 a}$
+
+$$
+x=\frac{-b \pm \sqrt{b^2-4 a c}}{2 a}
+$$
+
+\begin{equation}
+x=\frac{-b \pm \sqrt{b^2-4 a c}}{2 a}
+\end{equation}
+
+## Generating triangular distribution
+```{r}
+u <- runif(10^6) #generate U
+x <- sqrt(2*u) # create x based on first component
+indicator <- u>0.5 #
+x[indicator] <- 2-sqrt(2*(1-u[indicator])) #replace x based on 2nd component
+
+hist(x, freq = F)
+curve(x^1, from=0, to =1, col = "blue",add =TRUE)
+curve(2-x, from =1, to =2, col ="blue", add =T)
+
+```
+
+
+
