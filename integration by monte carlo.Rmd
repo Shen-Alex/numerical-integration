@@ -76,7 +76,7 @@ Secondly, let's do it using Monte Carlo
 
 ```{r}
 set.seed(1) 
-n <-10^4 #Set the number of points to generate
+n <-10^6 #Set the number of points to generate
 x<-runif(n, 0,1) #generate n number of points from uniform (0,1)
 h_x<- h(x)
 hbar_x <- mean(h(x)) #compute h(x), and the mean of h(x)
@@ -104,12 +104,4 @@ lines(hbar_n+1.96*se_n, col = "blue")
 lines(hbar_n-1.96*se_n, col = "blue")
 ```
 
-## Importance sampling example
 
-```{r}
-n <- 10000
-x <- rnorm(n, 10, 3)
-w_star <- dgamma(x, 8) / dnorm(x, 10, 3) 
-mu_hat_IS <- (cumsum(x * w_star) / (1:n))
-mu_hat_IS[n]  # Theoretical value = 8
-```
